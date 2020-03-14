@@ -1,15 +1,20 @@
 __author__ = "ハリネズミ"
-from flask import Flask
+from flask import Flask, make_response
+from util import is_isbn_or_key
 
 app = Flask(__name__)
 app.config.from_object("config")
 
 
-@app.route("/hello")
-def hello():
-    return "hello1"
-
-# app.add_url_rule("/hello", view_func=hello)
+@app.route("/book/search/<q>/<page>")
+def search(q, page):
+    """
+        q: isbn && 普通のキーワード
+        page(start, count)
+    :return:
+    """
+    isbn_or_key = is_isbn_or_key(q)
+    pass
 
 
 if __name__ == "__main__":
