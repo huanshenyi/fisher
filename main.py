@@ -2,6 +2,7 @@ __author__ = "ハリネズミ"
 from flask import Flask
 
 app = Flask(__name__)
+app.config.from_object("config")
 
 
 @app.route("/hello")
@@ -11,4 +12,5 @@ def hello():
 # app.add_url_rule("/hello", view_func=hello)
 
 
-app.run(host="0.0.0.0", debug=True, port="5000")
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", debug=app.config["DEBUG"], port="5000")
