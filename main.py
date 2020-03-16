@@ -1,6 +1,11 @@
 __author__ = "ハリネズミ"
-from flask import Flask, make_response
+
+import json
+
+from flask import Flask, jsonify
 from util import is_isbn_or_key
+
+from yushu_book import YuShuBook
 
 app = Flask(__name__)
 app.config.from_object("config")
@@ -14,7 +19,11 @@ def search(q, page):
     :return:
     """
     isbn_or_key = is_isbn_or_key(q)
-    pass
+    if isbn_or_key == 'isbn':
+        result = YuShuBook.search_by_isbn(q)
+    else:
+        result = YuShuBook.search_by_keyword(q)
+    return result
 
 
 if __name__ == "__main__":
