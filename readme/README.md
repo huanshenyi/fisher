@@ -34,4 +34,6 @@ app.add_url_rule("/hello", view_func=hello)
 http://t.yushu.im/v2/book/search?q={}&start={}&count={}
 
 http://t.yushu.im/v2/book/isbn/{isbn}
+
+http://localhost:5000/book/search?q=9787501524044&page=1
 ```
