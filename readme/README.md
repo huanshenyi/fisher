@@ -31,9 +31,16 @@ app.add_url_rule("/hello", view_func=hello)
 
 データapi
 ```python
-http://t.yushu.im/v2/book/search?q={}&start={}&count={}
+http://t.yushu.im/v2/book/search?q={}&count={}&start={}
 
 http://t.yushu.im/v2/book/isbn/{isbn}
 
 http://localhost:5000/book/search?q=9787501524044&page=1
+http://localhost:5000/book/search?q=蔡智恒&page=1
+```
+
+### 他のモジュールでappを取得
+
+```python
+from flask import current_app
 ```
