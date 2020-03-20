@@ -1,8 +1,8 @@
 from flask import request
 
 from app.forms.book import SearchForm
-from util import is_isbn_or_key
-from yushu_book import YuShuBook
+from app.libs.util import is_isbn_or_key
+from app.spider.yushu_book import YuShuBook
 
 from . import web
 
