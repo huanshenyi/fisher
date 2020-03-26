@@ -6,6 +6,19 @@ from app.spider.yushu_book import YuShuBook
 
 from . import web
 
+@web.route("/test")
+def test1():
+    from flask import request
+    from app.libs.none_local import n
+    print(n.v) # 1
+    n.v = 2
+    print("--------------")
+    print(getattr(request, "v", None)) #None
+    setattr(request, 'v', 2)
+    print("--------------")
+    return ""
+
+
 
 @web.route("/book/search")
 def search():
