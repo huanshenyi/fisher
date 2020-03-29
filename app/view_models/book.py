@@ -2,6 +2,35 @@ __author__ = "ハリネズミ"
 
 
 class BookViewModel:
+    """
+    単一Bookデータの処理
+    """
+    def __init__(self, book):
+        self.title = book["title"]
+        self.publisher = book["publisher"]
+        self.author = book["author"]
+        self.image = book["image"]
+        self.price = book["summary"]
+        self.summary = book["summary"]
+        self.pages = book["pages"]
+
+
+class BookCollection:
+    """
+    複数のBookデータの処理
+    """
+    def __init__(self):
+        self.total = 0
+        self.books = []
+        self.keyword = ""
+
+    def fill(self, yushu_book, keyword):
+        self.total = yushu_book.total
+        self.keyword = keyword
+        self.books = [BookViewModel(book) for book in yushu_book.books]
+
+
+class _BookViewModel:
     @classmethod
     def package_single(cls, data, keyword):
         """

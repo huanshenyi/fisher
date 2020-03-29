@@ -1,9 +1,10 @@
 from flask import request
+import json
 
 from app.forms.book import SearchForm
 from app.libs.util import is_isbn_or_key
 from app.spider.yushu_book import YuShuBook
-from app.view_models.book import BookViewModel
+from app.view_models.book import BookViewModel, BookCollection
 
 from . import web
 
@@ -35,16 +36,18 @@ def search():
     # 整数である、最大値制限をかける
     # page = request.args["page"]
     form = SearchForm(request.args)
+    books = BookCollection()
     if form.validate():
         q = form.q.data.strip()
         page = form.page.data
         isbn_or_key = is_isbn_or_key(q)
+        yushu_book = YuShuBook()
         if isbn_or_key == 'isbn':
-            result = YuShuBook.search_by_isbn(q)
-            result = BookViewModel.package_single(result, q)
+            yushu_book.search_by_isbn(q)
         else:
-            result = YuShuBook.search_by_keyword(q, page)
-            result = BookViewModel.package_collection(result, q)
-        return result
+            yushu_book.search_by_keyword(q, page)
+        books.fill(yushu_book, q)
+        print(books.__repr__())
+        return books
     else:
         return form.errors
