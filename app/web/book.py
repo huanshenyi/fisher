@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, jsonify
 import json
 
 from app.forms.book import SearchForm
@@ -37,17 +37,19 @@ def search():
     # page = request.args["page"]
     form = SearchForm(request.args)
     books = BookCollection()
+
     if form.validate():
         q = form.q.data.strip()
         page = form.page.data
         isbn_or_key = is_isbn_or_key(q)
         yushu_book = YuShuBook()
+
         if isbn_or_key == 'isbn':
             yushu_book.search_by_isbn(q)
         else:
             yushu_book.search_by_keyword(q, page)
+
         books.fill(yushu_book, q)
-        print(books.__repr__())
-        return books
+        return json.dumps(books, default=lambda o: o.__dict__)
     else:
         return form.errors

@@ -10,7 +10,7 @@ class BookViewModel:
         self.publisher = book["publisher"]
         self.author = book["author"]
         self.image = book["image"]
-        self.price = book["summary"]
+        self.price = book["price"]
         self.summary = book["summary"]
         self.pages = book["pages"]
 
