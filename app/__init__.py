@@ -4,6 +4,7 @@ from app.models.book import db
 
 
 def create_app():
+    # ここで使用してる__name__がプロジェクトの根を決めてる
     app = Flask(__name__)
     app.config.from_object("app.secure")
     app.config.from_object("app.setting")
