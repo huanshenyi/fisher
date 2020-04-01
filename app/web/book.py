@@ -1,4 +1,4 @@
-from flask import request, jsonify
+from flask import request, render_template
 import json
 
 from app.forms.book import SearchForm
@@ -10,6 +10,18 @@ from . import web
 
 
 @web.route("/test")
+def test():
+    r = {
+        "name": "七月",
+        "age": 18
+    }
+    r1 = {
+
+    }
+    return render_template("test.html", data=r, data1=r1)
+
+
+@web.route("/test1")
 def test1():
     from flask import request
     from app.libs.none_local import n
